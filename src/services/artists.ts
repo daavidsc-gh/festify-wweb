@@ -22,18 +22,19 @@ export const ARTISTS: Artist[] = [
   },
 ];
 
-export function getArtists(search = ""): Artist[] {
-  const query = search.toLowerCase().trim();
+export function getArtists(name = "", genre = ""): Artist[] {
+  const nameQuery = name.toLowerCase().trim();
+  const genreQuery = genre.toLowerCase().trim();
 
-  if (!query) {
+  if (!nameQuery && !genreQuery) {
     return ARTISTS;
   }
+  debugger;
 
   return ARTISTS.filter((artist) => {
-    const searchableFields = [artist.name, artist.genre ?? ""];
-
-    return searchableFields.some((field) =>
-      field.toLowerCase().includes(query)
+    return (
+      artist.name.toLowerCase() === nameQuery ||
+      artist.genre?.toLowerCase() === genreQuery
     );
   });
 }
